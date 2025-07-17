@@ -1,16 +1,15 @@
 import streamlit as st
+import os
 
-st.write(
-    """
-# Class1 課堂筆記
-# 你好，這裡是 H1
-## 這裡是 H2
-### 這裡是 H3
-#### 這裡是 H4
-# 這裡是程式區塊
-```python
-print("Hello World") # 可以顯示文字
-```
+folderPath = "markdown"
+files = os.listdir(folderPath)
+files_name = []
+for f in files:
+    if f.endswith(".md"):
+        files_name.append(f)
 
-"""
-)
+for f in files_name:
+    with open(f"{folderPath}/{f}", "r", encoding="utf-8") as file:
+        content = file.read()
+    with st.expander(f[:-3]):
+        st.write(content)
